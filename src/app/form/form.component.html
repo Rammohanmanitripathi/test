@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="text-center">Form Details</h2>
+  <form #form="ngForm">
+    <div class="form-group">
+      <label for="email">EMAIL</label>
+      <input required placeholder="Enter Email" type="email" email id="email" ngModel name="email" #email="ngModel"
+        class="form-control">
+      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+        <div *ngIf="email.errors?.required">Email is required</div>
+        <div *ngIf="email.errors?.email">Email is invalid</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>SUBSCRIPTION</label> 
+      <select class="form-control" name="subscrptn" ngModel required #subscrptn="ngModel">
+        <option *ngFor="let subscription of subscriptions" [value]="subscription">{{subscription}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pwd">PASSWORD</label>
+      <input placeholder="Enter Password" required type="Password" id="pwd" ngModel #pwd="ngModel" name="pwd" minlength="8"
+        class="form-control">
+      <div class="alert alert-danger" *ngIf="pwd.touched && pwd.invalid">
+        <div *ngIf="pwd.errors?.required">password is required</div>
+        <div *ngIf="pwd.errors?.minlength">password must be at least 8 characters long.</div>
+        <div *ngIf="pwd.errors?.pattern">Atleast one special charcter.</div>
+      </div>
+    </div>
+    <button (click)="save(form)" class="btn btn-primary" [disabled]="!form.valid" type="button">Submit
+    </button>
+    <button style="float:right;" class="btn btn-primary" (click)="clear()">Clear</button>
+  </form>
+</div>
